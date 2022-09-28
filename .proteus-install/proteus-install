@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+git clone --bare https://github.com/6r14n/proteus.git $HOME/.proteus
+
+# Shift
+function proteus {
+	/usr/bin/git --git-dir=$HOME/.proteus/ --work-tree=$HOME $@
+}
+
+# Checkout or Backup
+proteus checkout
+if [ $? = 0 ]; then
+	echo "Checked out config...";
+	else
+		mkdir -p .proteus-backup
+		echo "Backing up existing dot files...";
+		proteus checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .proteus-backup/{}
+fi;
+
+# Checkout again
+proteus checkout
+proteus config status.showUntrackedFiles no

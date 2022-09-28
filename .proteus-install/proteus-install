@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-git clone --bare https://github.com/6r14n/proteus.git $HOME/.proteus 2>&1 /dev/null
+git clone --bare https://github.com/6r14n/proteus.git $HOME/.proteus
 
 # Shift
 function proteus {
